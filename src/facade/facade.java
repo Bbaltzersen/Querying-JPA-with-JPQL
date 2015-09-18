@@ -22,7 +22,7 @@ import javax.persistence.Query;
 public class facade {
     
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("classicmodelsPU");
-        EntityManager em = emf.createEntityManager();
+    EntityManager em = emf.createEntityManager();
 
     public Employee createEmploye(int empNr, String lastName, String fName, String ext, String email, String jTitle, Office off) {
         Employee e1 = new Employee();  
@@ -39,9 +39,8 @@ public class facade {
              em.getTransaction().commit();
          }
          finally {
-             em.close();
          }
-          return e1;
+         return e1;
     }
 
     public long getEmployeCount() {
@@ -51,12 +50,9 @@ public class facade {
     }
 
     public List<Customer> getCustomersInCity(String city) {
-        System.out.println(city);
         Query q = em.createQuery("SELECT cusp FROM Customer cusp WHERE cusp.city = :city");
         q.setParameter("city", city);
-        System.out.println(q);
         List<Customer> cList = q.getResultList();
-        System.out.println(cList.toString());
         return cList;
     }
     
